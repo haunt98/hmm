@@ -1,1 +1,1 @@
-web: ./hmm
+web: ./bin/hmm
