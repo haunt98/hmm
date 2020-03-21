@@ -7,6 +7,7 @@ import (
 	"math/rand"
 	"net/http"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -37,7 +38,11 @@ func main() {
 
 	fileScanner := bufio.NewScanner(file)
 	for fileScanner.Scan() {
-		names = append(names, fileScanner.Text())
+		name := fileScanner.Text()
+		name = strings.TrimSpace(name)
+		name = strings.ReplaceAll(name, " ", "")
+		name = strings.ReplaceAll(name, "\t", "")
+		names = append(names, name)
 	}
 	if err := fileScanner.Err(); err != nil {
 		log.Println("failed to scan file", err)
