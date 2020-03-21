@@ -9,7 +9,7 @@ import (
 
 func getNames(filename string) ([]string, error) {
 	// open names.txt
-	file, err := os.Open("names.txt")
+	file, err := os.Open(filename)
 	if err != nil {
 		return nil, err
 	}
