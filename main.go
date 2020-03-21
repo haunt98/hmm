@@ -11,8 +11,8 @@ import (
 )
 
 const (
-	namesSize   = 1024
-	postfixSize = 1000
+	namesSize   = 4096
+	postfixSize = 10000
 )
 
 func main() {
@@ -44,13 +44,25 @@ func main() {
 		return
 	}
 
-	http.HandleFunc("/", func(writer http.ResponseWriter, req *http.Request) {
-		// rand names
+	http.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
+		if _, err := fmt.Fprintf(w, "GET /name\n"); err != nil {
+			log.Println(err)
+		}
+	})
+	http.HandleFunc("/name", func(w http.ResponseWriter, req *http.Request) {
+		if req.Method != http.MethodGet {
+			if _, err := fmt.Fprintf(w, "wrong method %s", req.Method); err != nil {
+				log.Println(err)
+				return
+			}
+		}
+
+		// rand name
 		rand.Seed(time.Now().UTC().UnixNano())
 		randIndex := rand.Intn(len(names))
 		postFix := rand.Intn(postfixSize)
 
-		if _, err := fmt.Fprintf(writer, "%s%d", names[randIndex], postFix); err != nil {
+		if _, err := fmt.Fprintf(w, "%s%d", names[randIndex], postFix); err != nil {
 			log.Println(err)
 			return
 		}
