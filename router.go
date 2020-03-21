@@ -5,7 +5,6 @@ import (
 	"log"
 	"math/rand"
 	"net/http"
-	"time"
 )
 
 type router struct {
@@ -27,7 +26,6 @@ func (r *router) routeName(w http.ResponseWriter, req *http.Request) {
 	}
 
 	// rand name
-	rand.Seed(time.Now().UTC().UnixNano())
 	randIndex := rand.Intn(len(r.names))
 	postFix := rand.Intn(postfixSize)
 

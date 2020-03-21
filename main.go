@@ -3,8 +3,10 @@ package main
 import (
 	"fmt"
 	"log"
+	"math/rand"
 	"net/http"
 	"os"
+	"time"
 )
 
 const (
@@ -20,6 +22,9 @@ func main() {
 		return
 	}
 	log.Printf("PORT is %s\n", port)
+
+	// pre seed
+	rand.Seed(time.Now().UTC().UnixNano())
 
 	names, err := getNames("dict/names.txt")
 	if err != nil {
