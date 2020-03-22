@@ -38,6 +38,7 @@ func main() {
 
 	http.HandleFunc("/", r.routeHome)
 	http.HandleFunc("/name", r.routeName)
+	http.HandleFunc("/project", r.routeProject)
 
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
 }
