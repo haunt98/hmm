@@ -13,7 +13,7 @@ var smallBazoka = []string{
 
 func randProject() string {
 	bigSize := 2 + rand.Intn(2)   // 2 or 3
-	smallSize := 2 + rand.Intn(2) // 2 or 3
+	smallSize := 1 + rand.Intn(2) // 1 or 2
 
 	project := ""
 	for i := 0; i < bigSize; i += 1 {
