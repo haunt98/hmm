@@ -9,10 +9,11 @@ import (
 
 type router struct {
 	names []string
+	gods  []string
 }
 
 func (r *router) routeHome(w http.ResponseWriter, req *http.Request) {
-	if _, err := fmt.Fprintf(w, "GET /name\nGET /project\n"); err != nil {
+	if _, err := fmt.Fprintf(w, "GET /name\nGET /project\nGET /god\n"); err != nil {
 		log.Println(err)
 	}
 }
@@ -49,6 +50,24 @@ func (r *router) routeProject(w http.ResponseWriter, req *http.Request) {
 
 	// send project
 	if _, err := fmt.Fprintf(w, "%s", project); err != nil {
+		log.Println(err)
+		return
+	}
+}
+
+func (r *router) routeGod(w http.ResponseWriter, req *http.Request) {
+	if req.Method != http.MethodGet {
+		if _, err := fmt.Fprintf(w, "wrong method %s", req.Method); err != nil {
+			log.Println(err)
+			return
+		}
+	}
+
+	// rand god
+	randIndex := rand.Intn(len(r.gods))
+
+	// send god
+	if _, err := fmt.Fprintf(w, "%s", r.gods[randIndex]); err != nil {
 		log.Println(err)
 		return
 	}

@@ -7,13 +7,13 @@ import (
 	"strings"
 )
 
-func getNames(filename string) ([]string, error) {
+func getValues(filename string) ([]string, error) {
 	// open names.txt
 	file, err := os.Open(filename)
 	if err != nil {
 		return nil, err
 	}
-	log.Println("open names.txt OK")
+	log.Printf("open %s OK\n", filename)
 
 	// scan each line then append to names
 	names := make([]string, 0, namesSize)

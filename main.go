@@ -26,19 +26,26 @@ func main() {
 	// pre seed
 	rand.Seed(time.Now().UTC().UnixNano())
 
-	names, err := getNames("dict/names.txt")
+	names, err := getValues("dict/names.txt")
 	if err != nil {
 		log.Println("get names failed", err)
 		return
 	}
 
+	gods, err := getValues("dict/gods.txt")
+	if err != nil {
+		log.Println("get gods failed", err)
+	}
+
 	r := router{
 		names: names,
+		gods:  gods,
 	}
 
 	http.HandleFunc("/", r.routeHome)
 	http.HandleFunc("/name", r.routeName)
 	http.HandleFunc("/project", r.routeProject)
+	http.HandleFunc("/god", r.routeGod)
 
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
 }
