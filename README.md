@@ -13,4 +13,5 @@ PORT=42069 go run *.go
 ```sh
 GET /name
 GET /project
+GET /god
 ```
